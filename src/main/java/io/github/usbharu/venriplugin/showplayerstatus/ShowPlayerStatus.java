@@ -102,7 +102,7 @@ public class ShowPlayerStatus implements Listener {
 
   @EventHandler
   public void onLevelChanged(PlayerLevelChangeEvent event){
-    if (event.getOldLevel() <event.getNewLevel()&&(event.getNewLevel()&30)==0){
+    if (event.getOldLevel() <event.getNewLevel()&&(event.getNewLevel()%30)==0){
       Player player = event.getPlayer();
       player.getServer().broadcastMessage(player.getName()+"のレベルが"+event.getNewLevel()+"になりました!");
     }
