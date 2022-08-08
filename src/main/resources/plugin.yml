@@ -1,0 +1,24 @@
+name: Venri-Plugin
+version: '${version}'
+main: io.github.usbharu.venriplugin.VenriPlugin
+api-version: 1.19
+authors: [ usbharu ]
+description: Plug-ins to help players accustomed to common games play Minecraft without stress.
+website: https://usbharu.github.io
+
+commands:
+  pin:
+    aliases:
+      - pin
+      - p
+    description: ピンを指します。
+  where:
+    aliases:
+      - where
+      - w
+    description: 現在地を表示します。
+  navigate:
+    aliases:
+      - navi
+      - nav
+    description: 指定したプレイヤー、ピンの方向を指し示します。
