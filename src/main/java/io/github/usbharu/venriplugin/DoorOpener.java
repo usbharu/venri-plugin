@@ -1,7 +1,6 @@
 package io.github.usbharu.venriplugin;
 
 import io.github.usbharu.venriplugin.util.MinecraftBlockUtil;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Door;
@@ -24,27 +23,44 @@ public class DoorOpener implements Listener {
       return;
     }
     if (MinecraftBlockUtil.isDoor(event.getClickedBlock().getType())) {
-      System.out.println(event.getClickedBlock().getBlockData());
       Door door = (Door) event.getClickedBlock().getBlockData();
       Vector vector = null;
-      if (door.getFacing().getModX() == 0) {
+      if (door.getFacing() == BlockFace.SOUTH) {
         if (door.getHinge() == Hinge.LEFT) {
           vector = new Vector(-1, 0, 0);
         } else if (door.getHinge() == Hinge.RIGHT) {
           vector = new Vector(1, 0, 0);
-        }else {
+        } else {
           return;
         }
-
-      } else if (door.getFacing().getModZ() == 0) {
+      } else if (door.getFacing() == BlockFace.WEST) {
         if (door.getHinge() == Hinge.LEFT) {
           vector = new Vector(0, 0, -1);
         } else if (door.getHinge() == Hinge.RIGHT) {
           vector = new Vector(0, 0, 1);
-        }else {
+        } else {
           return;
         }
-      }else {
+      } else if (door.getFacing() == BlockFace.EAST) {
+        Hinge hinge = door.getHinge();
+        if (hinge == Hinge.LEFT) {
+          vector = new Vector(0, 0, 1);
+        } else if (hinge == Hinge.RIGHT) {
+          vector = new Vector(0, 0, -1);
+        } else {
+          return;
+        }
+      } else if (door.getFacing() == BlockFace.NORTH) {
+        Hinge doorHinge = door.getHinge();
+        if (doorHinge == Hinge.LEFT) {
+          vector = new Vector(1, 0, 0);
+        } else if (doorHinge == Hinge.RIGHT) {
+          vector = new Vector(-1, 0, 0);
+        } else {
+          return;
+        }
+
+      } else {
         return;
       }
       Block block = event.getClickedBlock().getLocation().clone().add(vector).getBlock();
