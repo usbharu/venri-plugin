@@ -23,7 +23,6 @@ import org.bukkit.entity.Player;
 public class ActionBar {
 
   private static final String _VERSION;
-  private static final UUID uuid = UUID.randomUUID();
   private static Class<?> _CRAFTPLAYER_CLASS;
   private static Constructor<?> _PACKET_PLAY_OUT_CHAT_CONSTRUCTOR;
   private static Method _A_METHOD, _GETHANDLE_METHOD, _SEND_PACKET_METHOD;
