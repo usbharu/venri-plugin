@@ -1,3 +1,7 @@
-Functions:
-  DisplayDamage:
-    enable: true
+Server:
+  Functions:
+    DisplayDamage:
+      enable: true
+Player:
+  Functions:
+    DisplayDamage:

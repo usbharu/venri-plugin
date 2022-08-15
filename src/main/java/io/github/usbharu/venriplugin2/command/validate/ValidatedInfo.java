@@ -6,6 +6,7 @@ public enum ValidatedInfo {
   ARGUMENTS_NOT_IN_RANGE("Arguments not in rage"),
   ILLEGAL_ARGUMENT_LENGTH("Argument length is abnormal"),
   ILLEGAL_ARGUMENT("Invalid argument"),
+  NOT_PLAYER("Not Player"),
   SUCCESS("");
 
 

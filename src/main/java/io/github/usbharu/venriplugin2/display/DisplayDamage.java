@@ -1,9 +1,11 @@
 package io.github.usbharu.venriplugin2.display;
 
 import static io.github.usbharu.venriplugin2.VenriPlugin2.CONFIGURATION;
+import static io.github.usbharu.venriplugin2.command.validate.CommandValidation.validateArg;
+import static io.github.usbharu.venriplugin2.command.validate.CommandValidation.validateLength;
+import static io.github.usbharu.venriplugin2.command.validate.CommandValidation.validateMaxLength;
+import static io.github.usbharu.venriplugin2.command.validate.CommandValidation.validatePlayer;
 
-import io.github.usbharu.venriplugin2.command.validate.CommandValidation;
-import io.github.usbharu.venriplugin2.command.validate.Validate;
 import io.github.usbharu.venriplugin2.util.ActionBar;
 import java.util.List;
 import org.bukkit.attribute.Attribute;
@@ -21,8 +23,20 @@ import org.jetbrains.annotations.Nullable;
 
 public class DisplayDamage implements CommandExecutor, TabCompleter, Listener {
 
+  private static final String CONFIG_PATH = ".Functions.DisplayDamage.";
+  private static final String CONFIG_SERVER = "Server" + CONFIG_PATH;
+  private static final String CONFIG_PLAYER = "Player" + CONFIG_PATH;
+
   @EventHandler
   public void onTakeDamage(EntityDamageByEntityEvent event) {
+    if (!CONFIGURATION().getConfiguration().getBoolean(CONFIG_SERVER + "enable", true)) {
+      return;
+    }
+    if (!CONFIGURATION().getConfiguration()
+        .getBoolean(CONFIG_PLAYER + event.getDamager().getUniqueId() + ".enable", true)) {
+      return;
+    }
+
     if (event.getDamager() instanceof Player && event.getEntity() instanceof LivingEntity) {
       Player player = (Player) event.getDamager();
       LivingEntity entity = (LivingEntity) event.getEntity();
@@ -42,21 +56,34 @@ public class DisplayDamage implements CommandExecutor, TabCompleter, Listener {
       @NotNull Command command,
       @NotNull String label,
       @NotNull String[] args) {
-    if (!CommandValidation.verifyLength(args, 1).wasSuccess()) {
+    if (!validateMaxLength(args, 2).wasSuccess()) {
       return false;
     }
-    Validate validate = CommandValidation.verifyArg(args, 0, "enable", "disable");
-    if (!validate.wasSuccess()) {
+    if (validateArg(args, 0, "server").wasSuccess() && validateArg(args, 1, "enable",
+        "disable").wasSuccess()) {
+      serverConfig(args[1].equals("enable"));
+      return true;
+    }
+
+    if (!validatePlayer(sender).wasSuccess()) {
       return false;
     }
-    if (args[0].equals("enable")) {
-      CONFIGURATION().set("enable", true);
-      onEnabled();
-    } else {
-      CONFIGURATION().set("enable", false);
-      onDisabled();
+    if (validateLength(args, 1).wasSuccess() && validateArg(args, 0, "enable",
+        "disable").wasSuccess()) {
+      playerConfig((Player) sender, args[0].equals("enable"));
     }
     return true;
+  }
+
+
+  protected void serverConfig(boolean isSetEnable) {
+    CONFIGURATION().set(CONFIG_SERVER + "enable", isSetEnable);
+    CONFIGURATION().save();
+  }
+
+  protected void playerConfig(@NotNull Player sender, boolean isSetEnable) {
+    CONFIGURATION().set(CONFIG_PLAYER + sender.getUniqueId() + ".enable", isSetEnable);
+    CONFIGURATION().save();
   }
 
   @Override

@@ -7,16 +7,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class VenriPlugin2 extends JavaPlugin {
 
   private static FileConfiguration CONFIGURATION;
+  private static Config config;
 
-  public static FileConfiguration CONFIGURATION() {
-    return CONFIGURATION;
+  public static Config CONFIGURATION() {
+    return config;
   }
 
   @Override
   public void onEnable() {
     getLogger().info("Enable Venri-Plugin2 !!");
-    saveDefaultConfig();
-    CONFIGURATION = getConfig();
+    config = new Config(this);
     init();
   }
 
