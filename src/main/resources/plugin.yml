@@ -6,3 +6,12 @@ prefix: Venri-Plugin2
 authors: [ usbharu ]
 description: 便利機能を追加するプラグイン
 website: https://github.com/usbharu/venri-plugin
+
+commands:
+  displayDamage:
+    aliases:
+      - displaydamage
+      - display-damage
+      - damage
+      - dd
+    description: ダメージを表示する
