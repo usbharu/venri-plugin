@@ -1,4 +1,4 @@
-package io.github.usbharu.venriplugin2.pin;
+package io.github.usbharu.venriplugin2.pin.pins;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
