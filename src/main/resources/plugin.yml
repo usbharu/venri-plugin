@@ -12,6 +12,12 @@ commands:
     aliases:
       - displaydamage
       - display-damage
-      - damage
-      - dd
     description: ダメージを表示する
+  displayPlayerHealth:
+    aliases:
+      - dph
+    description: プレイヤーのHPを表示する
+  displayPlayerLevel:
+    aliases:
+      - dpl
+    description: プレイヤーのレベルを表示する

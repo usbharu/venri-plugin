@@ -7,6 +7,7 @@ import static io.github.usbharu.venriplugin2.command.validate.CommandValidation.
 import static io.github.usbharu.venriplugin2.command.validate.CommandValidation.validatePlayer;
 
 import io.github.usbharu.venriplugin2.util.ActionBar;
+import java.util.Arrays;
 import java.util.List;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
@@ -26,10 +27,12 @@ public class DisplayDamage implements CommandExecutor, TabCompleter, Listener {
   private static final String CONFIG_PATH = ".Functions.DisplayDamage.";
   private static final String CONFIG_SERVER = "Server" + CONFIG_PATH;
   private static final String CONFIG_PLAYER = "Player" + CONFIG_PATH;
+  private final String enable = "enable";
+  private final String disable = "disable";
 
   @EventHandler
   public void onTakeDamage(EntityDamageByEntityEvent event) {
-    if (!CONFIGURATION().getConfiguration().getBoolean(CONFIG_SERVER + "enable", true)) {
+    if (!CONFIGURATION().getConfiguration().getBoolean(CONFIG_SERVER + enable, true)) {
       return;
     }
     if (!CONFIGURATION().getConfiguration()
@@ -59,25 +62,25 @@ public class DisplayDamage implements CommandExecutor, TabCompleter, Listener {
     if (!validateMaxLength(args, 2).wasSuccess()) {
       return false;
     }
-    if (validateArg(args, 0, "server").wasSuccess() && validateArg(args, 1, "enable",
-        "disable").wasSuccess()) {
-      serverConfig(args[1].equals("enable"));
+    if (validateArg(args, 0, "server").wasSuccess() && validateArg(args, 1, enable,
+        disable).wasSuccess()) {
+      serverConfig(args[1].equals(enable));
       return true;
     }
 
     if (!validatePlayer(sender).wasSuccess()) {
       return false;
     }
-    if (validateLength(args, 1).wasSuccess() && validateArg(args, 0, "enable",
-        "disable").wasSuccess()) {
-      playerConfig((Player) sender, args[0].equals("enable"));
+    if (validateLength(args, 1).wasSuccess() && validateArg(args, 0, enable,
+        disable).wasSuccess()) {
+      playerConfig((Player) sender, args[0].equals(enable));
     }
     return true;
   }
 
 
   protected void serverConfig(boolean isSetEnable) {
-    CONFIGURATION().set(CONFIG_SERVER + "enable", isSetEnable);
+    CONFIGURATION().serverSet("DisplayDamage", enable, isSetEnable);
     CONFIGURATION().save();
   }
 
@@ -89,6 +92,11 @@ public class DisplayDamage implements CommandExecutor, TabCompleter, Listener {
   @Override
   public @Nullable List<String> onTabComplete(@NotNull CommandSender sender,
       @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+    if (args.length == 1) {
+      return Arrays.asList(enable, disable, "server");
+    } else if (args.length == 2 && args[1].equals("server")) {
+      return Arrays.asList(enable, disable);
+    }
     return null;
   }
 

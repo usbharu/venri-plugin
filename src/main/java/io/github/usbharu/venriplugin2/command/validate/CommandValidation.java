@@ -42,14 +42,18 @@ public class CommandValidation {
   }
 
   public static Validate validateArg(String[] args, int index, String expected, String... or) {
-    boolean result = args[index].equals(expected);
+    return validateLabel(args[index], expected, or);
+  }
+
+  public static Validate validateLabel(String label, String expected, String... or) {
+    boolean result = label.equals(expected);
     for (String s : or) {
       if (result) {
         break;
       }
-      result = args[index].equals(s);
+      result = label.equals(s);
     }
-    return builder(result, ILLEGAL_ARGUMENT, args[index]);
+    return builder(result, ILLEGAL_ARGUMENT, label);
   }
 
   public static Validate validatePlayer(CommandSender sender) {
