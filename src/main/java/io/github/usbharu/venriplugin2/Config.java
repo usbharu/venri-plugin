@@ -26,6 +26,7 @@ public class Config {
   }
 
   public void set(String path, Object value) {
+    System.out.println(path);
     configuration.set(path, value);
     save();
   }

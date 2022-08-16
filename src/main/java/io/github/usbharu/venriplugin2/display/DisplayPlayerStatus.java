@@ -76,9 +76,10 @@ public class DisplayPlayerStatus implements Listener, CommandExecutor {
       return false;
     }
 
-    if (validateLabel(label, "displayPlayerHealth", "dph").wasSuccess()) {
+    if (validateLabel(label, "displayPlayerHealth", "displayplayerhealth", "dph").wasSuccess()) {
       return displayPlayerHealthCommand(args, sender);
-    } else if (validateLabel(label, "displayPlayerLevel", "dpl").wasSuccess()) {
+    } else if (validateLabel(label, "displayPlayerLevel", "diplayplayerlevel",
+        "dpl").wasSuccess()) {
       return displayPlayerLevelCommand(args, sender);
     }
 

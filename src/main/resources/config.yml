@@ -2,6 +2,12 @@ Server:
   Functions:
     DisplayDamage:
       enable: true
+    DisplayPlayerHealth:
+      enable: true
+    DisplayPlayerLevel:
+      enable: true
 Player:
   Functions:
     DisplayDamage:
+    DisplayPlayerHealth:
+    DisplayPlayerLevel:
