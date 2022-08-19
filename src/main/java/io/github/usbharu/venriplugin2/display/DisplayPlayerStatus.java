@@ -27,6 +27,8 @@ public class DisplayPlayerStatus implements Listener, CommandExecutor {
   private final String enable = "enable";
   private final String disable = "disable";
 
+  // TODO: 2022/08/19 無効化してから有効化したときにサイド表示されない
+
   public DisplayPlayerStatus() {
     ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
     Scoreboard mainScoreboard = scoreboardManager.getMainScoreboard();

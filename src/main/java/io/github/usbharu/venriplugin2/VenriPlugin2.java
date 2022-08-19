@@ -2,6 +2,7 @@ package io.github.usbharu.venriplugin2;
 
 import io.github.usbharu.venriplugin2.display.DisplayDamage;
 import io.github.usbharu.venriplugin2.display.DisplayPlayerStatus;
+import io.github.usbharu.venriplugin2.pin.MinecraftPin;
 import org.bukkit.Server;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -44,5 +45,9 @@ public final class VenriPlugin2 extends JavaPlugin {
     server.getPluginManager().registerEvents(displayPlayerStatus, this);
     getCommand("displayPlayerHealth").setExecutor(displayPlayerStatus);
     getCommand("displayPlayerLevel").setExecutor(displayPlayerStatus);
+
+    MinecraftPin minecraftPin = new MinecraftPin();
+
+    server.getPluginManager().registerEvents(minecraftPin, this);
   }
 }
