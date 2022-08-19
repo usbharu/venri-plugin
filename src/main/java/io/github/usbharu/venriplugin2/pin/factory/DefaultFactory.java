@@ -22,7 +22,7 @@ public class DefaultFactory extends Factory {
   @Override
   protected void registerPin(Pin pin, String name, Player sender, Location location) {
     pin.setName(name);
-    pin.setLocation(location);
+    pin.setLocation(location.clone());
     pin.setPlayer(sender);
   }
 }
