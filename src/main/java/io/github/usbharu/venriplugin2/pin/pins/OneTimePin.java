@@ -16,6 +16,14 @@ public class OneTimePin extends DefaultPin {
     this.lifeTime = lifeTime;
   }
 
+  public int getLifeTime() {
+    return lifeTime;
+  }
+
+  public void setLifeTime(int lifeTime) {
+    this.lifeTime = lifeTime;
+  }
+
   @Override
   public void showPin() {
     super.showPin();

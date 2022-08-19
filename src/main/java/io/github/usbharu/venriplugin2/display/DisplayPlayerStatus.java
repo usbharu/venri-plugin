@@ -69,6 +69,7 @@ public class DisplayPlayerStatus implements Listener, CommandExecutor {
   }
 
 
+  // TODO: 2022/08/18 クラス分けたほうがいいと思う
   @Override
   public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command,
       @NotNull String label, @NotNull String[] args) {

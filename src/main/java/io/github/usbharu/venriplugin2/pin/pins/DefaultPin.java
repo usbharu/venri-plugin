@@ -8,13 +8,32 @@ import org.jetbrains.annotations.NotNull;
 
 public class DefaultPin extends AbstractPin {
 
-  private final @NotNull Location clone;
-  private final @NotNull World world;
+  private @NotNull Location clone;
+  private @NotNull World world;
+
+  public DefaultPin() {
+  }
 
   public DefaultPin(String name, Player player, Location location) {
     super(name, location);
     clone = location.clone();
     world = player.getWorld();
+  }
+
+  public Location getClone() {
+    return clone;
+  }
+
+  public void setClone(Location clone) {
+    this.clone = clone;
+  }
+
+  public World getWorld() {
+    return world;
+  }
+
+  public void setWorld(World world) {
+    this.world = world;
   }
 
   @Override
