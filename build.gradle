@@ -15,7 +15,17 @@ repositories {
 
 dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
+    implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
     compileOnly 'org.bukkit:bukkit:1.15.2-R0.1-SNAPSHOT'
+    testImplementation 'org.bukkit:bukkit:1.15.2-R0.1-SNAPSHOT'
+}
+
+test {
+    useJUnitPlatform()
+    reports {
+        junitXml.enabled = true
+        html.enabled = false
+    }
 }
 
 def targetJavaVersion = 8
