@@ -88,20 +88,27 @@ public class DisplayPlayerStatus implements Listener, CommandExecutor {
   }
 
   private boolean displayPlayerHealthCommand(@NotNull String[] args, CommandSender sender) {
+
     if (validateArg(args, 0, "server").wasSuccess() && validateArg(args, 1, enable,
         disable).wasSuccess()) {
       CONFIGURATION().serverSet("DisplayPlayerHealth", enable, args[1].equals(enable));
+      Bukkit.getScoreboardManager().getMainScoreboard().clearSlot(DisplaySlot.BELOW_NAME);
       return true;
     }
+
     if (!validatePlayer(sender).wasSuccess()) {
       sender.sendMessage(
           "プレイヤーの設定はプレイヤーのみ設定できます。サーバーの設定をする場合は \"/displayPlayerHealth server enable\" コマンドを使ってください ");
       return false;
     }
+
     if (validateArg(args, 0, enable, disable).wasSuccess()) {
 
       CONFIGURATION().playerSet("DisplayPlayerHealth", enable, ((Player) sender),
           args[0].equals(enable));
+      if (args[0].equals(disable)) {
+        Bukkit.getScoreboardManager().getMainScoreboard().clearSlot(DisplaySlot.PLAYER_LIST);
+      }
     }
     return true;
   }
