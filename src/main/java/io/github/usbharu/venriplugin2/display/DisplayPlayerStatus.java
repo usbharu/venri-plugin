@@ -93,6 +93,9 @@ public class DisplayPlayerStatus implements Listener, CommandExecutor {
         disable).wasSuccess()) {
       CONFIGURATION().serverSet("DisplayPlayerHealth", enable, args[1].equals(enable));
       Bukkit.getScoreboardManager().getMainScoreboard().clearSlot(DisplaySlot.BELOW_NAME);
+      for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+        onlinePlayer.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+      }
       return true;
     }
 
@@ -108,6 +111,9 @@ public class DisplayPlayerStatus implements Listener, CommandExecutor {
           args[0].equals(enable));
       if (args[0].equals(disable)) {
         Bukkit.getScoreboardManager().getMainScoreboard().clearSlot(DisplaySlot.PLAYER_LIST);
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+          onlinePlayer.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+        }
       }
     }
     return true;
