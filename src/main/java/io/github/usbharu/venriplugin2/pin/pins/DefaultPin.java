@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class DefaultPin extends AbstractPin {
 
-  private @NotNull Location clone;
   private @NotNull World world;
 
   public DefaultPin() {
@@ -16,16 +15,14 @@ public class DefaultPin extends AbstractPin {
 
   public DefaultPin(String name, Player player, Location location) {
     super(name, location);
-    clone = location.clone();
+    super.location = location.clone();
     world = player.getWorld();
   }
 
-  public Location getClone() {
-    return clone;
-  }
-
-  public void setClone(Location clone) {
-    this.clone = clone;
+  @Override
+  public void setPlayer(Player player) {
+    super.setPlayer(player);
+    world = player.getWorld();
   }
 
   public World getWorld() {
@@ -38,6 +35,8 @@ public class DefaultPin extends AbstractPin {
 
   @Override
   public void showPin() {
-    world.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, clone, 0, 0, 0.1, 0, 20, null, true);
+
+    world.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, location, 0, 0, 0.1, 0, 20, null, true);
+
   }
 }

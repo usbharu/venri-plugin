@@ -7,6 +7,10 @@ public class OneTimePin extends DefaultPin {
 
   private int lifeTime = 300;
 
+
+  public OneTimePin() {
+  }
+
   public OneTimePin(String name, Player player, Location location) {
     super(name, player, location);
   }

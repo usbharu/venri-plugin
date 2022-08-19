@@ -8,13 +8,12 @@ public abstract class Factory {
 
   public final Pin create(String owner, String name, Player sender, Location location) {
     Pin pin = createPin(owner);
-    registerPin(pin, name, sender, location);
-    return pin;
+    return registerPin(pin, name, sender, location);
   }
 
 
   protected abstract Pin createPin(String owner);
 
-  protected abstract void registerPin(Pin pin, String name, Player sender, Location location);
+  protected abstract Pin registerPin(Pin pin, String name, Player sender, Location location);
 
 }
